@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CUS0" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CUS0>
+    <HEADER>
+     <ACTIVITY>Z_GENIE_EDITOR_CONF</ACTIVITY>
+     <DOCU_ID>SIMGZ_GENIE_EDITOR_CONF</DOCU_ID>
+     <C_ACTIVITY>Z_GENIE_EDITOR_CONF</C_ACTIVITY>
+     <TCODE>Y_ED4_15000022</TCODE>
+    </HEADER>
+    <TEXTS>
+     <CUS_IMGACT>
+      <SPRAS>E</SPRAS>
+      <ACTIVITY>Z_GENIE_EDITOR_CONF</ACTIVITY>
+      <TEXT>Configure Context Menu</TEXT>
+     </CUS_IMGACT>
+    </TEXTS>
+   </CUS0>
+  </asx:values>
+ </asx:abap>
+</abapGit>

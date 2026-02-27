@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp; &amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Object/namespace is not whitelisted for ABAP Assistant</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>ABAP Assist currently not supporting in Webgui</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Missing Genie Auth for the feature &amp;1.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Only single Org entry supported for access control in current version.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Feature is either disabled or not configued in table ZCAC_GENIE_ACCES.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Maintain Model Key in the team &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Package is not whitelisted. Approval required before adding std package.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>AI ABAP Assistant Context Setup Successful!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>AI ABAP Assist Context Setup failed. Please contact Google ABAP SDK Team!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>AI ABAP Assistant Setup Deleted!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>AI ABAP Assis Setup Deletion failed. Please contact Google ABAP SDK Team!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Could not determine system client category.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>This tool should not be used in Production or SAP Reference systems.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CUS0" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CUS0>
+    <HEADER>
+     <ACTIVITY>ZCAM_GENIE_PRMPT</ACTIVITY>
+     <DOCU_ID>SIMGZCAM_GENIE_PRMPT</DOCU_ID>
+     <C_ACTIVITY>ZCAM_GENIE_PRMPT</C_ACTIVITY>
+     <TCODE>Y_ED4_15000021</TCODE>
+    </HEADER>
+    <TEXTS>
+     <CUS_IMGACT>
+      <SPRAS>E</SPRAS>
+      <ACTIVITY>ZCAM_GENIE_PRMPT</ACTIVITY>
+      <TEXT>Maintain Prompt Templates</TEXT>
+     </CUS_IMGACT>
+    </TEXTS>
+   </CUS0>
+  </asx:values>
+ </asx:abap>
+</abapGit>

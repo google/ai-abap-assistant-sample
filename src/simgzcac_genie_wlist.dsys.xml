@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DSYS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DSYS>
+    <HEAD>
+     <TDOBJECT>DOKU</TDOBJECT>
+     <TDNAME>SIMGZCAC_GENIE_WLIST</TDNAME>
+     <TDID>HY</TDID>
+     <TDSPRAS>E</TDSPRAS>
+     <TDFORM>S_DOCU_SHOW</TDFORM>
+     <TDSTYLE>S_DOCUS1</TDSTYLE>
+     <TDVERSION>00001</TDVERSION>
+     <TDLINESIZE>072</TDLINESIZE>
+    </HEAD>
+    <LINES>
+     <TLINE/>
+     <TLINE>
+      <TDFORMAT>UT</TDFORMAT>
+      <TDLINE>&amp;USE&amp;</TDLINE>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>AS</TDFORMAT>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>UT</TDFORMAT>
+      <TDLINE>&amp;PRECONDITIONS&amp;</TDLINE>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>AS</TDFORMAT>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>UT</TDFORMAT>
+      <TDLINE>&amp;STANDARD_SETUP&amp;</TDLINE>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>AS</TDFORMAT>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>UT</TDFORMAT>
+      <TDLINE>&amp;ACTIVITY&amp;</TDLINE>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>AS</TDFORMAT>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>UT</TDFORMAT>
+      <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+     </TLINE>
+     <TLINE>
+      <TDFORMAT>AS</TDFORMAT>
+     </TLINE>
+    </LINES>
+   </DSYS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

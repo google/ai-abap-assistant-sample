@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CUS0" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CUS0>
+    <HEADER>
+     <ACTIVITY>ZCAC_GENIE_WLIST</ACTIVITY>
+     <DOCU_ID>SIMGZCAC_GENIE_WLIST</DOCU_ID>
+     <C_ACTIVITY>ZCAC_GENIE_WLIST</C_ACTIVITY>
+     <TCODE>Y_ED4_15000019</TCODE>
+    </HEADER>
+    <TEXTS>
+     <CUS_IMGACT>
+      <SPRAS>E</SPRAS>
+      <ACTIVITY>ZCAC_GENIE_WLIST</ACTIVITY>
+      <TEXT>Whitelist Packages</TEXT>
+     </CUS_IMGACT>
+    </TEXTS>
+   </CUS0>
+  </asx:values>
+ </asx:abap>
+</abapGit>
