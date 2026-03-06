@@ -140,16 +140,17 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
         INTO @ls_ai_config.
     ENDIF.
 
-    lo_aiclient = NEW #( iv_key_name = ls_ai_config-client_key ).
+    TRY.
+        lo_aiclient = NEW #( iv_key_name = ls_ai_config-client_key ).
 
-    IF lo_aiclient IS NOT INITIAL.
+        IF lo_aiclient IS NOT INITIAL.
 
-      lv_p_projects_id   = lo_aiclient->gv_project_id.
-      lv_p_locations_id  = ls_ai_config-locations_id.
-      lv_p_publishers_id = ls_ai_config-publishers_id.
-      lv_p_models_id     = ls_ai_config-model_id.
+          lv_p_projects_id   = lo_aiclient->gv_project_id.
+          lv_p_locations_id  = ls_ai_config-locations_id.
+          lv_p_publishers_id = ls_ai_config-publishers_id.
+          lv_p_models_id     = ls_ai_config-model_id.
 
-      TRY.
+
           lo_aiclient->set_useragent_suffix(
                         iv_useragent_suffix  =
                           /goog/cl_vertex_ai_sdk_utility=>get_useragent_suffix(
@@ -177,10 +178,10 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
           ELSE.
             rs_response-response = lv_err_text.
           ENDIF.
-        CATCH /goog/cx_sdk INTO DATA(lo_sdk_ex).
-          rs_response-response = lo_sdk_ex->get_text( ).
-      ENDTRY.
-    ENDIF.
+        ENDIF.
+      CATCH /goog/cx_sdk INTO DATA(lo_sdk_ex).
+        rs_response-response = lo_sdk_ex->get_text( ).
+    ENDTRY.
   ENDMETHOD.
 
 
