@@ -149,32 +149,37 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
       lv_p_publishers_id = ls_ai_config-publishers_id.
       lv_p_models_id     = ls_ai_config-model_id.
 
-      lo_aiclient->set_useragent_suffix(
-                    iv_useragent_suffix  =
-                      /goog/cl_vertex_ai_sdk_utility=>get_useragent_suffix(
-                        iv_module_identifier =
-                          /goog/cl_vertex_ai_sdk_utility=>c_useragent-gen_multimodal_ai_inv
-                        iv_addnal_identifier = lc_abap_assist ) ).
+      TRY.
+          lo_aiclient->set_useragent_suffix(
+                        iv_useragent_suffix  =
+                          /goog/cl_vertex_ai_sdk_utility=>get_useragent_suffix(
+                            iv_module_identifier =
+                              /goog/cl_vertex_ai_sdk_utility=>c_useragent-gen_multimodal_ai_inv
+                            iv_addnal_identifier = lc_abap_assist ) ).
 
-      lo_aiclient->generate_content_models(
-        EXPORTING
-          iv_p_projects_id   = lv_p_projects_id
-          iv_p_locations_id  = lv_p_locations_id
-          iv_p_publishers_id = lv_p_publishers_id
-          iv_p_models_id     = lv_p_models_id
-          is_input           = is_input
-        IMPORTING
-          es_raw             = ls_raw
-          es_output          = ls_output
-          ev_ret_code        = lv_ret_code
-          ev_err_text        = lv_err_text
-          es_err_resp        = ls_err_resp ).
+          lo_aiclient->generate_content_models(
+            EXPORTING
+              iv_p_projects_id   = lv_p_projects_id
+              iv_p_locations_id  = lv_p_locations_id
+              iv_p_publishers_id = lv_p_publishers_id
+              iv_p_models_id     = lv_p_models_id
+              is_input           = is_input
+            IMPORTING
+              es_raw             = ls_raw
+              es_output          = ls_output
+              ev_ret_code        = lv_ret_code
+              ev_err_text        = lv_err_text
+              es_err_resp        = ls_err_resp ).
 
-      IF lv_ret_code = 200.
-        lo_response = NEW #( is_content_response = ls_output ).
-        rs_response-response = lo_response->get_text( ).
-      ELSE.
-      ENDIF.
+          IF lv_ret_code = 200.
+            lo_response = NEW #( is_content_response = ls_output ).
+            rs_response-response = lo_response->get_text( ).
+          ELSE.
+            rs_response-response = lv_err_text.
+          ENDIF.
+        CATCH /goog/cx_sdk INTO DATA(lo_sdk_ex).
+          rs_response-response = lo_sdk_ex->get_text( ).
+      ENDTRY.
     ENDIF.
   ENDMETHOD.
 
