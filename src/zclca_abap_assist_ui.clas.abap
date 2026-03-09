@@ -322,7 +322,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD abap_unit_test.
 
     DATA: lv_prompt   TYPE string,
-          ls_response TYPE zifca_abap_assist_aiutil=>type_response.
+          ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
     lv_prompt = TEXT-006.
 
@@ -358,6 +358,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
 
   METHOD build_banner.
+
     DATA: ls_user03 TYPE usr03.
 
     CALL FUNCTION 'SUSR_SHOW_USER_DETAILS'
@@ -367,9 +368,11 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
         no_display = abap_true
       CHANGING
         user_usr03 = ls_user03.
-
-    APPEND |<div class = "welcome-banner" ><h1 class = "gradient-text" > Hello, | &
-           |{ ls_user03-name1 }| & |</h1></div>| TO ct_banner.
+    " Escape the user's name to prevent XSS
+    DATA(lv_safe_name) = escape( val    = CONV string( ls_user03-name1 )
+                                 format = cl_abap_format=>e_html_text ).
+    APPEND |<div class="welcome-banner"><h1 class="gradient-text"> Hello, | &
+           |{ lv_safe_name }| & |</h1></div>| TO ct_banner.
 
   ENDMETHOD.
 
@@ -384,7 +387,6 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
           lv_offset TYPE i,
           lv_length TYPE i.
 
-    " Split the string by line breaks (manual approach)
     DATA: lt_code_lines TYPE TABLE OF string,
           lv_line       TYPE string,
           lv_remaining  TYPE string.
@@ -393,7 +395,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
     split_lines(
       EXPORTING
-        iv_text  =  iv_code
+        iv_text  = iv_code
       IMPORTING
         et_lines = lt_code_lines ).
 
@@ -406,17 +408,21 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     rv_html = rv_html && |<div class="code-bar">|.
     rv_html = rv_html && |<span>ABAP</span>|.
 
-    CONCATENATE rv_html '<a href="SAPEVENT:COPY?'  gv_codecounter  '|' iv_respid
+    CONCATENATE rv_html '<a href="SAPEVENT:COPY?' gv_codecounter '|' iv_respid
                 '"><button class="rounded-button">Copy</button></a>' INTO rv_html.
 
     IF gv_abap_displaymode = 'A' AND gv_fullscreen = abap_false.
-      CONCATENATE rv_html '&nbsp<a href="SAPEVENT:ACCEPT?'  gv_codecounter '|' iv_respid
-                  '"><button class="rounded-button">Accept</button></a>' INTO rv_html.
+      CONCATENATE rv_html '&nbsp<a href="SAPEVENT:ACCEPT?' gv_codecounter '|'
+                  iv_respid '"><button class="rounded-button">Accept</button></a>'
+                  INTO rv_html.
     ENDIF.
     rv_html = rv_html && |</div>|.
 
     LOOP AT lt_code_lines INTO lv_line.
-      CONCATENATE  rv_html  lv_line '<br>' INTO rv_html.
+      " Escape the raw code logic safely into HTML text
+      DATA(lv_safe_line) = escape( val    = lv_line
+                                   format = cl_abap_format=>e_html_text ).
+      CONCATENATE rv_html lv_safe_line '<br>' INTO rv_html.
     ENDLOOP.
 
     APPEND VALUE #( id = gv_codecounter
@@ -534,6 +540,30 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
 
   METHOD build_explanation_block.
+
+*    DATA: lv_chunk  TYPE string,
+*          lv_html   TYPE string,
+*          lv_offset TYPE i,
+*          lt_lines  TYPE STANDARD TABLE OF string,
+*          lv_length TYPE i.
+*
+*    split_lines(
+*      EXPORTING
+*        iv_text  = iv_code
+*      IMPORTING
+*        et_lines = lt_lines
+*    ).
+*
+*    LOOP AT lt_lines INTO DATA(ls_line).
+*      REPLACE ALL OCCURRENCES OF '*' IN ls_line WITH ''.
+*      REPLACE ALL OCCURRENCES OF '`' IN ls_line WITH ''.
+*
+*      DATA(lv_safe_line) = escape( val    = ls_line
+*                                   format = cl_abap_format=>e_html_text ).
+*      rv_html = rv_html && lv_safe_line.
+*    ENDLOOP.
+*
+*    rv_html = rv_html && lv_html.
 
     DATA: lv_chunk  TYPE string,
           lv_html   TYPE string,
@@ -800,9 +830,9 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     DATA: lt_chat   TYPE zclca_ai_logger=>zif_ai_logger~gty_t_convo,
           lv_length TYPE int4.
 
-
     DATA(lt_chat_history) = zclca_ai_logger=>zif_ai_logger~get_convo_history( ).
     APPEND LINES OF lt_chat_history FROM 1 TO 6 TO lt_chat.
+
     IF lt_chat IS NOT INITIAL.
       LOOP AT lt_chat INTO DATA(ls_chat_history) WHERE t_req_resp IS NOT INITIAL.
         IF sy-tabix = 1.
@@ -815,7 +845,13 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
         DATA(lv_str) = ls_chat_history-t_req_resp[ 1 ]-request_string.
         lv_str = lv_str(lv_length).
         lv_str = lv_str && |...|.
-        APPEND |<li><a href="SAPEVENT:RECENTCHAT?{ ls_chat_history-convo_id }"><button class="recent-list-item">{ lv_str  }</button></a></li><br/>| TO ct_table.
+
+        DATA(lv_safe_str) = escape( val    = lv_str
+                                    format = cl_abap_format=>e_html_text ).
+
+        APPEND |<li><a href="SAPEVENT:RECENTCHAT?{ ls_chat_history-convo_id }">| &
+               |<button class="recent-list-item">{ lv_safe_str }</button></a></li>| &
+               |<br/>| TO ct_table.
         CLEAR: lv_length, lv_str.
       ENDLOOP.
       APPEND |</ul>| TO ct_table.
@@ -826,12 +862,17 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
   METHOD build_request_html_tag.
 
-    DATA: lv_output  TYPE char200.
-    DATA(lt_request_table) = split_string_to_table( EXPORTING iv_string  = iv_input ).
+    DATA: lv_output TYPE char200.
 
-    lv_output = |<br/><div class="right-box"><div class="message user-message"><div class="message-content">| .
+    DATA(lv_safe_input) = escape( val    = iv_input
+                                  format = cl_abap_format=>e_html_text ).
+    DATA(lt_request_table) = split_string_to_table( EXPORTING iv_string = lv_safe_input ).
+
+    lv_output = |<br/><div class="right-box"><div class="message user-message">| &
+                |<div class="message-content">| .
     APPEND lv_output TO ct_table.
     CLEAR lv_output.
+
     APPEND LINES OF lt_request_table TO ct_table.
     lv_output = |</div></div></div>|.
     APPEND lv_output TO ct_table.
@@ -1255,7 +1296,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD code_review.
 
     DATA: lv_prompt   TYPE string,
-          ls_response TYPE zifca_abap_assist_aiutil=>type_response.
+          ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
     lv_prompt = TEXT-004.
 
@@ -1305,7 +1346,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD explain_code.
 
     DATA: lv_prompt   TYPE string,
-          ls_response TYPE zifca_abap_assist_aiutil=>type_response.
+          ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
     lv_prompt = TEXT-003.
 
@@ -1507,7 +1548,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD pai_of_screen_100.
     DATA: lv_request      TYPE string,
           lt_context_code TYPE seop_source_string,
-          ls_response     TYPE zifca_abap_assist_aiutil=>type_response,
+          ls_response     TYPE zifca_abap_assist_aiutil=>ty_response,
           lt_html         TYPE ztca_response_table,
           lv_prompt       TYPE string,
           lv_handle       TYPE i.
@@ -1876,7 +1917,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD suggest_code_improvement.
 
     DATA: lv_prompt   TYPE string,
-          ls_response TYPE zifca_abap_assist_aiutil=>type_response.
+          ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
     lv_prompt = TEXT-005.
 
@@ -1914,7 +1955,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
   METHOD translate.
 
     DATA: lv_prompt   TYPE string,
-          ls_response TYPE zifca_abap_assist_aiutil=>type_response.
+          ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
     lv_prompt = text-005.
 
