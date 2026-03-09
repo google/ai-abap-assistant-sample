@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_ENHS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TOOL>BADI_DEF</TOOL>
+   <SHORTTEXT>Content Modification for AI ABAP Assistant</SHORTTEXT>
+   <BADI_DATA>
+    <ENH_BADI_DATA>
+     <BADI_NAME>ZBADI_CA_LLM_CONTENT_MOD</BADI_NAME>
+     <INTERFACE_NAME>ZIFCA_LLM_CONTENT_MOD</INTERFACE_NAME>
+     <CONTEXT_MODE>N</CONTEXT_MODE>
+     <BADI_SHORTTEXT>LLM Content Modification for AI ABAP Assistant</BADI_SHORTTEXT>
+     <BADI_SHORTTEXT_ID>4201AC1B3A381FD183A0B449A559946A</BADI_SHORTTEXT_ID>
+    </ENH_BADI_DATA>
+   </BADI_DATA>
+  </asx:values>
+ </asx:abap>
+</abapGit>

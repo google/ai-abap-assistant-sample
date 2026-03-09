@@ -17,11 +17,11 @@ INTERFACE zifca_abap_assist_aiutil
 
 
   TYPES:
-    BEGIN OF type_response,
+    BEGIN OF ty_response,
       response   TYPE string,
       identifier TYPE string,
-    END OF type_response .
-  TYPES gs_response TYPE type_response .
+    END OF ty_response .
+  TYPES gs_response TYPE ty_response .
 
   CONSTANTS:
     BEGIN OF gc_user_action_enum,
@@ -38,7 +38,7 @@ INTERFACE zifca_abap_assist_aiutil
       !iv_convo_id       TYPE zcai_ai_convo_id OPTIONAL
       !is_trkey          TYPE trkey OPTIONAL
     RETURNING
-      VALUE(rs_response) TYPE type_response .
+      VALUE(rs_response) TYPE ty_response .
   METHODS fetch_llm_response
     IMPORTING
       !iv_prompt         TYPE string
@@ -47,5 +47,5 @@ INTERFACE zifca_abap_assist_aiutil
       !iv_llm_model      TYPE zca_abap_assist_model_key
       !iv_convo_id       TYPE zcai_ai_convo_id OPTIONAL
     RETURNING
-      VALUE(rs_response) TYPE type_response .
+      VALUE(rs_response) TYPE ty_response .
 ENDINTERFACE.

@@ -764,6 +764,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     ls_output = `</svg></button></div>`.
     APPEND ls_output TO ct_table.
     ls_output = `*LLMs can make mistakes. Consider double-checking responses before implementing any changes in your system.`.
+    APPEND ls_output TO ct_table.
 
     " Build the Div closing tags
 ***
