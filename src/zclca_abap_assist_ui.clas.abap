@@ -60,8 +60,6 @@ CLASS zclca_abap_assist_ui DEFINITION
         stylesheet  TYPE string VALUE '&STYLESHEET&',
         prompt      TYPE string VALUE '&PROMPT&',
         response    TYPE string VALUE '&RESPONSE&',
-*        html_template       TYPE tdobname VALUE 'YCA_ABAPCODEGEN_HTML',
-*        stylesheet_template TYPE tdobname VALUE 'YCA_ABAPCODEGEN_CSS',
       END OF gc_constants .
     CONSTANTS:
       BEGIN OF gc_fcodes,
@@ -541,30 +539,6 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
   METHOD build_explanation_block.
 
-*    DATA: lv_chunk  TYPE string,
-*          lv_html   TYPE string,
-*          lv_offset TYPE i,
-*          lt_lines  TYPE STANDARD TABLE OF string,
-*          lv_length TYPE i.
-*
-*    split_lines(
-*      EXPORTING
-*        iv_text  = iv_code
-*      IMPORTING
-*        et_lines = lt_lines
-*    ).
-*
-*    LOOP AT lt_lines INTO DATA(ls_line).
-*      REPLACE ALL OCCURRENCES OF '*' IN ls_line WITH ''.
-*      REPLACE ALL OCCURRENCES OF '`' IN ls_line WITH ''.
-*
-*      DATA(lv_safe_line) = escape( val    = ls_line
-*                                   format = cl_abap_format=>e_html_text ).
-*      rv_html = rv_html && lv_safe_line.
-*    ENDLOOP.
-*
-*    rv_html = rv_html && lv_html.
-
     DATA: lv_chunk  TYPE string,
           lv_html   TYPE string,
           lv_offset TYPE i,
@@ -772,12 +746,6 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
     ls_output = '</div>'.
     APPEND ls_output TO ct_table.
-
-*** Build Feedback bar
-*
-*    IF iv_response_content IS NOT INITIAL AND gv_sendrequest IS NOT INITIAL.
-*      build_feedback_bar( EXPORTING iv_conv_identifier = iv_conv_identifier CHANGING ct_output = ct_table ).
-*    ENDIF.
 
 * Build input box **
     "Build the HTML closing tags
@@ -1697,7 +1665,6 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
       go_custom_container = create_custom_container( iv_name = lc_output ).
     ENDIF.
 
-**    IF go_html_viewer IS INITIAL.
     IF go_html_viewer IS NOT BOUND.
       go_html_viewer = NEW cl_gui_html_viewer(
           parent                   = go_custom_container
