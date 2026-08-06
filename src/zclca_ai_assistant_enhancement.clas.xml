@@ -32,6 +32,12 @@
      <ENTRY>https://cloud.google.com/vertex-ai/docs/reference/rest/v1/GenerateContentResponse#finishreason</ENTRY>
      <LENGTH>132</LENGTH>
     </item>
+    <item>
+     <ID>I</ID>
+     <KEY>009</KEY>
+     <ENTRY>Not Found</ENTRY>
+     <LENGTH>19</LENGTH>
+    </item>
    </TPOOL>
    <DESCRIPTIONS>
     <SEOCOMPOTX>

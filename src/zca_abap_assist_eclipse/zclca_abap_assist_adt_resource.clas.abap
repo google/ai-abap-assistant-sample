@@ -90,8 +90,7 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RESOURCE IMPLEMENTATION.
                                      convo_id = ls_chat_history-convo_id
                                      prompt = lv_prompt
                                      response = ls_response-response
-                                     additional_info = 'response received'
-                                     ) .
+                                     additional_info = text-001 ) .
       LOOP AT lt_history ASSIGNING FIELD-SYMBOL(<ls_history>).
         APPEND INITIAL LINE TO ls_adt_conversation-history
           ASSIGNING FIELD-SYMBOL(<ls_history_new>).
@@ -119,7 +118,7 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RESOURCE IMPLEMENTATION.
 
       ls_adt_conversation = VALUE #( username = ls_user03-name1 ).
 
-      SELECT * FROM zcac_abapast_mdl INTO TABLE @DATA(lt_models).
+      SELECT * FROM zcac_abapast_mdl INTO TABLE @DATA(lt_models).  "#EC CI_NOWHERE
       IF sy-subrc = 0.
         LOOP AT lt_models ASSIGNING FIELD-SYMBOL(<ls_model>).
           APPEND VALUE #( model_key = <ls_model>-model_key
@@ -164,14 +163,14 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RESOURCE IMPLEMENTATION.
       zclca_ai_logger=>get_instance( )->zif_ai_logger~log_feedback(
                                       iv_resp_id = CONV #( lv_like )
                                       iv_rating = zif_ai_logger=>gc_rating-thumbs_up ).
-      ls_adt_conversation-additional_info = 'Feedback updated.'.
+      ls_adt_conversation-additional_info = text-002.
     ENDIF.
 
     IF lv_dislike IS NOT INITIAL.
       zclca_ai_logger=>get_instance( )->zif_ai_logger~log_feedback(
                                       iv_resp_id = CONV #( lv_dislike )
                                       iv_rating = zif_ai_logger=>gc_rating-thumbs_down ).
-      ls_adt_conversation-additional_info = 'Feedback updated.'.
+      ls_adt_conversation-additional_info = text-002.
     ENDIF.
 
     IF lv_copy IS NOT INITIAL OR lv_accept IS NOT INITIAL.

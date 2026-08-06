@@ -161,155 +161,155 @@ CLASS zclca_abap_assist_ui DEFINITION
     METHODS llm_model_reselected
       IMPORTING
         !iv_model_key TYPE zca_abap_assist_model_key .
-PROTECTED SECTION.
-PRIVATE SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 
-  TYPES:
-    pict_line(1022) TYPE x .
-  TYPES:
-    pict_tab        TYPE STANDARD TABLE OF pict_line
-                                        WITH EMPTY KEY .
+    TYPES:
+      pict_line(1022) TYPE x .
+    TYPES:
+      pict_tab        TYPE STANDARD TABLE OF pict_line
+                                          WITH EMPTY KEY .
 
-  DATA go_aiutil TYPE REF TO zifca_abap_assist_aiutil .
-  DATA gv_llm_model TYPE zca_abap_assist_model_key .
-  DATA gv_convo_id TYPE zcai_ai_convo_id .
+    DATA go_aiutil TYPE REF TO zifca_abap_assist_aiutil .
+    DATA gv_llm_model TYPE zca_abap_assist_model_key .
+    DATA gv_convo_id TYPE zcai_ai_convo_id .
 
-  METHODS prepare_for_recent_chat
-    IMPORTING
-      !iv_convo_id TYPE zcai_ai_convo_id .
-  METHODS build_collapsing_button
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS build_model_dropdown
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS build_new_chat_button
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS build_recent_chat_menu
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS build_script
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS explain_code
-    IMPORTING
-      !iv_from_pbo TYPE abap_bool OPTIONAL .
-  METHODS quick_action
-    IMPORTING
-      !iv_action TYPE char50 .
-  METHODS populate_template
-    IMPORTING
-      !iv_template_id TYPE string .
-  METHODS build_code_block
-    IMPORTING
-      !iv_code       TYPE string
-      !iv_respid     TYPE zcai_ai_resp_id
-    RETURNING
-      VALUE(rv_html) TYPE string .
-  METHODS build_explanation_block
-    IMPORTING
-      !iv_code       TYPE string
-    RETURNING
-      VALUE(rv_html) TYPE string .
-  METHODS build_html_parsing_response
-    IMPORTING
-      !iv_input      TYPE string
-      !iv_respid     TYPE zcai_ai_resp_id
-    RETURNING
-      VALUE(rv_html) TYPE string .
-  METHODS build_banner
-    CHANGING
-      !ct_banner TYPE ztca_response_table .
-  METHODS build_html
-    IMPORTING
-      VALUE(iv_input_request) TYPE string OPTIONAL
-      !iv_response_content    TYPE string OPTIONAL
-      !iv_option_selected     TYPE char10 OPTIONAL
-      !it_context_code        TYPE seop_source_string OPTIONAL
-      !iv_conv_identifier     TYPE string OPTIONAL
-    RETURNING
-      VALUE(ct_table)         TYPE ztca_response_table .
-  METHODS build_request_html_tag
-    IMPORTING
-      !iv_input       TYPE string
-    CHANGING
-      VALUE(ct_table) TYPE ztca_response_table .
-  METHODS build_response_html_tag
-    IMPORTING
-      !iv_input           TYPE string
-      !iv_option_selected TYPE char10 OPTIONAL
-      !iv_respid          TYPE zcai_ai_resp_id
-    CHANGING
-      !ct_table           TYPE ztca_response_table .
-  METHODS show_html
-    CHANGING
-      !it_html_table  TYPE ztca_response_table
-      !io_html_viewer TYPE REF TO cl_gui_html_viewer
-      !cv_url         TYPE char1024 .
-  METHODS create_custom_container
-    IMPORTING
-      !iv_name           TYPE char100
-    RETURNING
-      VALUE(eo_instance) TYPE REF TO cl_gui_custom_container .
-  METHODS get_ai_utililty
-    RETURNING
-      VALUE(ro_aiutil) TYPE REF TO zifca_abap_assist_aiutil .
-  METHODS split_lines
-    IMPORTING
-      !iv_text  TYPE string
-    EXPORTING
-      !et_lines TYPE string_table .
-  METHODS build_stylesheet
-    CHANGING
-      !ct_stylesheet_tags TYPE ztca_response_table .
-  METHODS build_startup_tiles
-    CHANGING
-      !ct_output TYPE ztca_response_table .
-  METHODS build_code_string
-    RETURNING
-      VALUE(rv_code_string) TYPE string .
-  METHODS code_review
-    IMPORTING
-      !iv_from_pbo TYPE abap_bool OPTIONAL .
-  METHODS suggest_code_improvement
-    IMPORTING
-      !iv_from_pbo TYPE abap_bool OPTIONAL .
-  METHODS translate
-    IMPORTING
-      !iv_from_pbo TYPE abap_bool OPTIONAL .
-  METHODS abap_unit_test
-    IMPORTING
-      !iv_from_pbo TYPE abap_bool OPTIONAL .
-  CLASS-METHODS get_pict_tab
-    IMPORTING
-      !mime_url       TYPE csequence
-    RETURNING
-      VALUE(pict_tab) TYPE pict_tab .
-  METHODS build_feedback_bar
-    IMPORTING
-      !iv_conv_identifier TYPE zcai_ai_resp_id OPTIONAL
-    CHANGING
-      !ct_output          TYPE ztca_response_table .
-  METHODS build_conversation
-    IMPORTING
-      !iv_request         TYPE string
-      !iv_response        TYPE string
-      !iv_conv_identifier TYPE string OPTIONAL
-    EXPORTING
-      !et_output          TYPE ztca_response_table .
-  METHODS build_nav_menu
-    CHANGING
-      !ct_table TYPE ztca_response_table .
-  METHODS build_main_container
-    IMPORTING
-      VALUE(iv_input_request) TYPE string OPTIONAL
-      !iv_response_content    TYPE string OPTIONAL
-      !iv_option_selected     TYPE char10 OPTIONAL
-      !it_context_code        TYPE seop_source_string OPTIONAL
-      !iv_conv_identifier     TYPE string OPTIONAL
-    CHANGING
-      VALUE(ct_table)         TYPE ztca_response_table .
+    METHODS prepare_for_recent_chat
+      IMPORTING
+        !iv_convo_id TYPE zcai_ai_convo_id .
+    METHODS build_collapsing_button
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS build_model_dropdown
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS build_new_chat_button
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS build_recent_chat_menu
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS build_script
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS explain_code
+      IMPORTING
+        !iv_from_pbo TYPE abap_bool OPTIONAL .
+    METHODS quick_action
+      IMPORTING
+        !iv_action TYPE char50 .
+    METHODS populate_template
+      IMPORTING
+        !iv_template_id TYPE string .
+    METHODS build_code_block
+      IMPORTING
+        !iv_code       TYPE string
+        !iv_respid     TYPE zcai_ai_resp_id
+      RETURNING
+        VALUE(rv_html) TYPE string .
+    METHODS build_explanation_block
+      IMPORTING
+        !iv_code       TYPE string
+      RETURNING
+        VALUE(rv_html) TYPE string .
+    METHODS build_html_parsing_response
+      IMPORTING
+        !iv_input      TYPE string
+        !iv_respid     TYPE zcai_ai_resp_id
+      RETURNING
+        VALUE(rv_html) TYPE string .
+    METHODS build_banner
+      CHANGING
+        !ct_banner TYPE ztca_response_table .
+    METHODS build_html
+      IMPORTING
+        VALUE(iv_input_request) TYPE string OPTIONAL
+        !iv_response_content    TYPE string OPTIONAL
+        !iv_option_selected     TYPE char10 OPTIONAL
+        !it_context_code        TYPE seop_source_string OPTIONAL
+        !iv_conv_identifier     TYPE string OPTIONAL
+      RETURNING
+        VALUE(ct_table)         TYPE ztca_response_table .
+    METHODS build_request_html_tag
+      IMPORTING
+        !iv_input       TYPE string
+      CHANGING
+        VALUE(ct_table) TYPE ztca_response_table .
+    METHODS build_response_html_tag
+      IMPORTING
+        !iv_input           TYPE string
+        !iv_option_selected TYPE char10 OPTIONAL
+        !iv_respid          TYPE zcai_ai_resp_id
+      CHANGING
+        !ct_table           TYPE ztca_response_table .
+    METHODS show_html
+      CHANGING
+        !it_html_table  TYPE ztca_response_table
+        !io_html_viewer TYPE REF TO cl_gui_html_viewer
+        !cv_url         TYPE char1024 .
+    METHODS create_custom_container
+      IMPORTING
+        !iv_name           TYPE char100
+      RETURNING
+        VALUE(eo_instance) TYPE REF TO cl_gui_custom_container .
+    METHODS get_ai_utililty
+      RETURNING
+        VALUE(ro_aiutil) TYPE REF TO zifca_abap_assist_aiutil .
+    METHODS split_lines
+      IMPORTING
+        !iv_text  TYPE string
+      EXPORTING
+        !et_lines TYPE string_table .
+    METHODS build_stylesheet
+      CHANGING
+        !ct_stylesheet_tags TYPE ztca_response_table .
+    METHODS build_startup_tiles
+      CHANGING
+        !ct_output TYPE ztca_response_table .
+    METHODS build_code_string
+      RETURNING
+        VALUE(rv_code_string) TYPE string .
+    METHODS code_review
+      IMPORTING
+        !iv_from_pbo TYPE abap_bool OPTIONAL .
+    METHODS suggest_code_improvement
+      IMPORTING
+        !iv_from_pbo TYPE abap_bool OPTIONAL .
+    METHODS translate
+      IMPORTING
+        !iv_from_pbo TYPE abap_bool OPTIONAL .
+    METHODS abap_unit_test
+      IMPORTING
+        !iv_from_pbo TYPE abap_bool OPTIONAL .
+    CLASS-METHODS get_pict_tab
+      IMPORTING
+        !mime_url       TYPE csequence
+      RETURNING
+        VALUE(pict_tab) TYPE pict_tab .
+    METHODS build_feedback_bar
+      IMPORTING
+        !iv_conv_identifier TYPE zcai_ai_resp_id OPTIONAL
+      CHANGING
+        !ct_output          TYPE ztca_response_table .
+    METHODS build_conversation
+      IMPORTING
+        !iv_request         TYPE string
+        !iv_response        TYPE string
+        !iv_conv_identifier TYPE string OPTIONAL
+      EXPORTING
+        !et_output          TYPE ztca_response_table .
+    METHODS build_nav_menu
+      CHANGING
+        !ct_table TYPE ztca_response_table .
+    METHODS build_main_container
+      IMPORTING
+        VALUE(iv_input_request) TYPE string OPTIONAL
+        !iv_response_content    TYPE string OPTIONAL
+        !iv_option_selected     TYPE char10 OPTIONAL
+        !it_context_code        TYPE seop_source_string OPTIONAL
+        !iv_conv_identifier     TYPE string OPTIONAL
+      CHANGING
+        VALUE(ct_table)         TYPE ztca_response_table .
 ENDCLASS.
 
 
@@ -322,7 +322,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     DATA: lv_prompt   TYPE string,
           ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
-    lv_prompt = TEXT-006.
+    lv_prompt = text-006.
 
     IF zclca_abap_assist_ui=>gv_inprocess IS INITIAL AND
        zclca_abap_assist_ui=>gv_sendrequest IS INITIAL AND
@@ -369,7 +369,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     " Escape the user's name to prevent XSS
     DATA(lv_safe_name) = escape( val    = CONV string( ls_user03-name1 )
                                  format = cl_abap_format=>e_html_text ).
-    APPEND |<div class="welcome-banner"><h1 class="gradient-text"> Hello, | &
+    APPEND |<div class="welcome-banner"><h1 class="gradient-text"> { text-013 } | &
            |{ lv_safe_name }| & |</h1></div>| TO ct_banner.
 
   ENDMETHOD.
@@ -407,11 +407,13 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     rv_html = rv_html && |<span>ABAP</span>|.
 
     CONCATENATE rv_html '<a href="SAPEVENT:COPY?' gv_codecounter '|' iv_respid
-                '"><button class="rounded-button">Copy</button></a>' INTO rv_html.
+                '"><button class="rounded-button">' text-011 '</button></a>' INTO rv_html.
+
+*    rv_html = |{ rv_html }<a href="SAPEVENT:COPY?{ gv_codecounter }|{ iv_respid }|
 
     IF gv_abap_displaymode = 'A' AND gv_fullscreen = abap_false.
       CONCATENATE rv_html '&nbsp<a href="SAPEVENT:ACCEPT?' gv_codecounter '|'
-                  iv_respid '"><button class="rounded-button">Accept</button></a>'
+                  iv_respid '"><button class="rounded-button">' text-012 '</button></a>'
                   INTO rv_html.
     ENDIF.
     rv_html = rv_html && |</div>|.
@@ -491,7 +493,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 ***
           " Build the deafult response text
 ***
-          lv_response_temp = TEXT-007.
+          lv_response_temp = text-007.
           build_response_html_tag( EXPORTING iv_input = lv_response_temp
                                              iv_option_selected = ''
                                              iv_respid = ls_cache_conv-resp_id
@@ -691,7 +693,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
           lv_remaining = substring( val = lv_input off = lv_code_end + 3 ).
           lv_input = lv_remaining.
         ELSE.
-          rv_html = rv_html && '<p>Error: Unclosed code block found.</p>'.
+          rv_html = rv_html && |<p>{ text-010 }</p>|.
           EXIT.
         ENDIF.
 
@@ -761,7 +763,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     APPEND ls_output TO ct_table.
     ls_output = `</svg></button></div>`.
     APPEND ls_output TO ct_table.
-    ls_output = `*LLMs can make mistakes. Consider double-checking responses before implementing any changes in your system.`.
+    ls_output = `*` && text-019.
     APPEND ls_output TO ct_table.
 
     " Build the Div closing tags
@@ -789,7 +791,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
 
   METHOD build_new_chat_button.
-    APPEND |<div class="nav-items"><a href="SAPEVENT:QA?NEWCHAT"><button class="rounded-button left-box"> +  New Chat</button></a></div>| TO ct_table.
+    APPEND |<div class="nav-items"><a href="SAPEVENT:QA?NEWCHAT"><button class="rounded-button left-box"> + { text-008 }</button></a></div>| TO ct_table.
   ENDMETHOD.
 
 
@@ -804,7 +806,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     IF lt_chat IS NOT INITIAL.
       LOOP AT lt_chat INTO DATA(ls_chat_history) WHERE t_req_resp IS NOT INITIAL.
         IF sy-tabix = 1.
-          APPEND |<ul class="recent-list"><h6>Recent</h6>| TO ct_table.
+          APPEND |<ul class="recent-list"><h6>{ text-009 }</h6>| TO ct_table.
         ENDIF.
         lv_length = strlen( ls_chat_history-t_req_resp[ 1 ]-request_string ).
         IF lv_length > 35.
@@ -922,7 +924,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     SELECT * FROM zca_prompt_templ
         INTO TABLE gt_templates.
 
-    APPEND |<div class="welcome-box-container">Level up your coding. Get the help you need in ABAP to build your projects and learn as you go.</div><br/>|
+    APPEND |<div class="welcome-box-container">{ text-014 }</div><br/>|
     TO ct_output.
 
     APPEND '<div class="welcome-box-container">' TO ct_output.
@@ -939,10 +941,10 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     IF gv_fullscreen = abap_false.
       APPEND '<h4 class="gradient-text">Quick action</h4>' TO ct_output.
       APPEND '<div class="welcome-box-container">' TO ct_output.
-      APPEND '<a href="SAPEVENT:QA?G_EXPLAIN"><button class="rounded-button">Explain code</button></a>' TO ct_output.
-      APPEND '<a href="SAPEVENT:QA?G_REVIEW"><button class="rounded-button">Review code</button></a>' TO ct_output.
-      APPEND '<a href="SAPEVENT:QA?G_SUGGEST"><button class="rounded-button">Suggest Improvements</button></a>' TO ct_output.
-      APPEND '<a href="SAPEVENT:QA?G_AUT"><button class="rounded-button">Write ABAP Unit test</button></a></div>' TO ct_output.
+      APPEND '<a href="SAPEVENT:QA?G_EXPLAIN"><button class="rounded-button">' && text-015 && '</button></a>' TO ct_output.
+      APPEND '<a href="SAPEVENT:QA?G_REVIEW"><button class="rounded-button">' && text-016 && '</button></a>' TO ct_output.
+      APPEND '<a href="SAPEVENT:QA?G_SUGGEST"><button class="rounded-button">' && text-017 && '</button></a>' TO ct_output.
+      APPEND '<a href="SAPEVENT:QA?G_AUT"><button class="rounded-button">' && text-018 && '</button></a></div>' TO ct_output.
     ENDIF.
   ENDMETHOD.
 
@@ -1266,7 +1268,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     DATA: lv_prompt   TYPE string,
           ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
-    lv_prompt = TEXT-004.
+    lv_prompt = text-004.
 
     IF zclca_abap_assist_ui=>gv_inprocess IS INITIAL AND
        zclca_abap_assist_ui=>gv_sendrequest IS INITIAL AND
@@ -1306,7 +1308,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
 
   METHOD create_custom_container.
-    eo_instance = new #( container_name = iv_name ).
+    eo_instance = NEW #( container_name = iv_name ).
 
   ENDMETHOD.
 
@@ -1316,7 +1318,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     DATA: lv_prompt   TYPE string,
           ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
-    lv_prompt = TEXT-003.
+    lv_prompt = text-003.
 
     IF zclca_abap_assist_ui=>gv_inprocess IS INITIAL AND
        zclca_abap_assist_ui=>gv_sendrequest IS INITIAL AND
@@ -1353,7 +1355,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
     DATA: lt_list TYPE vrm_values.
 
-    SELECT model_key, model_name FROM zcac_abapast_mdl INTO TABLE @DATA(lt_abap_assist_models).
+    SELECT model_key, model_name FROM zcac_abapast_mdl INTO TABLE @DATA(lt_abap_assist_models).  "#EC CI_NOWHERE
     IF sy-subrc = 0.
 
       lt_list = VALUE #( FOR ls_model IN lt_abap_assist_models ( key = ls_model-model_key
@@ -1846,7 +1848,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
         ENDIF.
 
       CATCH cx_root. " Catch potential regex errors
-        MESSAGE e000(zca_abap_assist) WITH 'Invalid regular expression'.
+        MESSAGE e014(zca_abap_assist).
     ENDTRY.
   ENDMETHOD.
 
@@ -1886,7 +1888,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     DATA: lv_prompt   TYPE string,
           ls_response TYPE zifca_abap_assist_aiutil=>ty_response.
 
-    lv_prompt = TEXT-005.
+    lv_prompt = text-005.
 
     IF zclca_abap_assist_ui=>gv_inprocess IS INITIAL AND
        zclca_abap_assist_ui=>gv_sendrequest IS INITIAL AND

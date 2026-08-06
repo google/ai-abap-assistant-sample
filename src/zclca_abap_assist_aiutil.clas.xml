@@ -42,6 +42,12 @@
      <LANGU>E</LANGU>
      <DESCRIPT>Prompt ID</DESCRIPT>
     </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCLCA_ABAP_ASSIST_AIUTIL</CLSNAME>
+     <CMPNAME>GV_LANG_NAME_EN</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Name of Language</DESCRIPT>
+    </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>
  </asx:abap>

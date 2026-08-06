@@ -94,7 +94,7 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RES_CONT IMPLEMENTATION.
                                      convo_id = ls_chat_history-convo_id
                                      prompt = lv_prompt
                                      response = ls_response-response
-                                     additional_info = 'response received' ) .
+                                     additional_info = text-001 ) .
 
       LOOP AT lt_history ASSIGNING FIELD-SYMBOL(<ls_history>).
         APPEND INITIAL LINE TO ls_adt_conversation-history

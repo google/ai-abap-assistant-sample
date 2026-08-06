@@ -72,7 +72,7 @@ CLASS ZCLCA_AI_ASSISTANT_ENHANCEMENT IMPLEMENTATION.
             ev_block = lr_callstack->mainprogram.
         ENDCASE.
       CATCH cx_sy_itab_line_not_found.
-        ev_block = 'Not found'.
+        ev_block = text-009.
     ENDTRY.
 
   ENDMETHOD.
@@ -96,7 +96,7 @@ CLASS ZCLCA_AI_ASSISTANT_ENHANCEMENT IMPLEMENTATION.
       WHERE name = 'GENIE_BREAKPOINT'
         AND low  = @sy-uname.
     IF sy-subrc = 0.
-      BREAK-POINT.
+      BREAK-POINT  ##NO_BREAK.
     ENDIF.
 
   ENDMETHOD.
