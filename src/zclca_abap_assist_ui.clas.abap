@@ -39,7 +39,7 @@ CLASS zclca_abap_assist_ui DEFINITION
       END OF ty_code .
 
     CLASS-DATA:
-      gt_templates TYPE STANDARD TABLE OF zca_prompt_templ .
+      gt_templates TYPE STANDARD TABLE OF zca_prompt_tmplt .
     CLASS-DATA gv_sendrequest TYPE char1 .
     CLASS-DATA gv_codecounter TYPE char10 .
     CLASS-DATA gv_inprocess TYPE char1 .
@@ -753,7 +753,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     "Build the HTML closing tags
     ls_output = `<div class="input-container" style="max-width: 99%;"> <textarea id="promptInput" class="input-box"`.
     APPEND ls_output TO ct_table.
-    ls_output =  `placeholder="Enter your prompt here..." rows="2"></textarea>`.
+    ls_output =  `placeholder="` && text-021 && `" rows="2"></textarea>`.
     APPEND ls_output TO ct_table.
     ls_output = `<button id="sendButton" class="send-button" onClick="sendInput();"><svg xmlns="http://www.w3.org/2000/svg" `.
     APPEND ls_output TO ct_table.
@@ -921,8 +921,19 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
 
   METHOD build_startup_tiles.
 
-    SELECT * FROM zca_prompt_templ
-        INTO TABLE gt_templates.
+    SELECT zca_prompt_tmplt~* FROM zca_prompt_tmplt INNER JOIN zca_prompt_templ
+      ON zca_prompt_tmplt~id = zca_prompt_templ~id
+      WHERE spras = @sy-langu
+      AND active = @abap_true
+      INTO TABLE @gt_templates.
+
+    IF sy-subrc <> 0.
+      SELECT zca_prompt_tmplt~* FROM zca_prompt_tmplt INNER JOIN zca_prompt_templ
+        ON zca_prompt_tmplt~id = zca_prompt_templ~id
+        WHERE spras = 'E'
+        AND active = @abap_true
+        INTO TABLE @gt_templates.
+    ENDIF.
 
     APPEND |<div class="welcome-box-container">{ text-014 }</div><br/>|
     TO ct_output.
@@ -939,7 +950,7 @@ CLASS ZCLCA_ABAP_ASSIST_UI IMPLEMENTATION.
     APPEND '</div><br/><br/>' TO ct_output.
 
     IF gv_fullscreen = abap_false.
-      APPEND '<h4 class="gradient-text">Quick action</h4>' TO ct_output.
+      APPEND '<h4 class="gradient-text">' && text-020 && '</h4>' TO ct_output.
       APPEND '<div class="welcome-box-container">' TO ct_output.
       APPEND '<a href="SAPEVENT:QA?G_EXPLAIN"><button class="rounded-button">' && text-015 && '</button></a>' TO ct_output.
       APPEND '<a href="SAPEVENT:QA?G_REVIEW"><button class="rounded-button">' && text-016 && '</button></a>' TO ct_output.
