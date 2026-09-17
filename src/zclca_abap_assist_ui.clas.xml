@@ -126,6 +126,18 @@
      <ENTRY>LLMs can make mistakes. Consider double-checking responses before implementing any changes in your system.</ENTRY>
      <LENGTH>132</LENGTH>
     </item>
+    <item>
+     <ID>I</ID>
+     <KEY>020</KEY>
+     <ENTRY>Quick action</ENTRY>
+     <LENGTH>22</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>021</KEY>
+     <ENTRY>Enter your prompt here...</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
    </TPOOL>
   </asx:values>
  </asx:abap>

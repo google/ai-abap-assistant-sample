@@ -118,7 +118,7 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RESOURCE IMPLEMENTATION.
 
       ls_adt_conversation = VALUE #( username = ls_user03-name1 ).
 
-      SELECT * FROM zcac_abapast_mdl INTO TABLE @DATA(lt_models).  "#EC CI_NOWHERE
+      SELECT * FROM zcac_abapast_mdl INTO TABLE @DATA(lt_models). "#EC CI_NOWHERE
       IF sy-subrc = 0.
         LOOP AT lt_models ASSIGNING FIELD-SYMBOL(<ls_model>).
           APPEND VALUE #( model_key = <ls_model>-model_key
@@ -127,8 +127,19 @@ CLASS ZCLCA_ABAP_ASSIST_ADT_RESOURCE IMPLEMENTATION.
         UNASSIGN <ls_model>.
       ENDIF.
 
-      SELECT * FROM zca_prompt_templ INTO TABLE @DATA(lt_templates).
-      IF sy-subrc = 0.
+      SELECT zca_prompt_tmplt~id, description, template
+        FROM zca_prompt_tmplt INNER JOIN zca_prompt_templ
+        ON zca_prompt_tmplt~id  = zca_prompt_templ~id
+        INTO TABLE @DATA(lt_templates)
+        WHERE spras = @sy-langu AND active = @abap_true.
+      IF sy-subrc <> 0.
+        SELECT zca_prompt_tmplt~id, description, template
+          FROM zca_prompt_tmplt INNER JOIN zca_prompt_templ
+          ON zca_prompt_tmplt~id  = zca_prompt_templ~id
+          INTO TABLE @lt_templates
+          WHERE spras = 'E' AND active = @abap_true.
+      ENDIF.
+      IF lt_templates IS NOT INITIAL.  "sy-subrc = 0.
         LOOP AT lt_templates ASSIGNING FIELD-SYMBOL(<ls_template>).
           APPEND  VALUE #( template_id = <ls_template>-id
                             description = <ls_template>-description
