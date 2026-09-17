@@ -1,0 +1,10 @@
+931722       K /MD1_ALL/  1  55  92   0   0   6   0   0   0 153  740   .  0   0   0   0   0 001
+#A
+#/1/                          A   G   D   C   R   7   T   -   Z RELE EX.  _   _   _   _   _ CLI
+MD1 f 0000 20260903212202 sapdsmapp02       md1adm
+MD1 e 0008 20260903212224 sapdsmapp02       md1adm
+MD1 f 0000 20260904020517 sapdsmapp01       md1adm
+MD1 e 0000 20260904020523 sapdsmapp01       md1adm
+MD1.801 < 0000 20260904020551 sapdsmapp01       md1adm
+MP1.001 < 0000 20260904020604 sapdsmapp01       md1adm
+MD1.001 E 0004 20260904020614 sapdsmapp01       md1adm
