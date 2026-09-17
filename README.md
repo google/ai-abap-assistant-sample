@@ -1,6 +1,6 @@
 # About this repository
 
-This repository contains code samples, and other artifacts related to the below product: 
+This repository contains code samples, and other artifacts related to the below product:
 
 | Product Name              | Description   | Sub-directory | Setup Guide |
 | ------------------------- |---------------| ------------- | ------------- |
@@ -13,4 +13,4 @@ This repository contains code samples, and other artifacts related to the below 
 
 ## Disclaimer
 
-The code within this repository are not officially supported by Google. 
+The code within this repository are not officially supported by Google.
