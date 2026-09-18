@@ -64,6 +64,7 @@ CLASS zclca_abap_assist_aiutil DEFINITION
     CONSTANTS gc_review_prompt_id TYPE zca_prompt_id VALUE 'CODE_REVIEW' ##NO_TEXT.
     CONSTANTS gc_suggest_prompt_id TYPE zca_prompt_id VALUE 'CODE_SUGGEST' ##NO_TEXT.
     CONSTANTS gc_translate_prompt_id TYPE zca_prompt_id VALUE 'TRANSLATE' ##NO_TEXT.
+    CLASS-DATA gv_lang_name_en TYPE sptxt .
 
     METHODS preprocessing
       IMPORTING
@@ -83,6 +84,9 @@ CLASS zclca_abap_assist_aiutil DEFINITION
         !is_trkey                     TYPE trkey
       RETURNING
         VALUE(rv_package_whitelisted) TYPE flag .
+    METHODS get_language_context
+      RETURNING
+        VALUE(rv_lang_name_en) TYPE sptxt .
 ENDCLASS.
 
 
@@ -186,6 +190,27 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
 
 
   METHOD constructor.
+
+  ENDMETHOD.
+
+
+  METHOD get_language_context.
+
+    CONSTANTS: lc_spras_e TYPE spras VALUE 'E',
+               lc_english TYPE sptxt VALUE 'English'.
+
+    IF gv_lang_name_en IS INITIAL.
+      SELECT SINGLE sptxt
+      FROM t002t
+      INTO @gv_lang_name_en
+      WHERE sprsl = @sy-langu   " Language code you want translated (e.g. sy-langu)
+        AND spras = @lc_spras_e.        " Display text language = English ('E')
+      IF sy-subrc <> 0.
+        gv_lang_name_en = lc_english.
+      ENDIF.
+    ENDIF.
+
+    rv_lang_name_en = gv_lang_name_en.
 
   ENDMETHOD.
 
@@ -324,6 +349,7 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
         " Logic moved from execute_user_action
         APPEND VALUE #( name  = '{user_prompt}'
                         value = lv_prompt ) TO lt_data_key.
+        APPEND VALUE #( name = '{llm_convo_lang}' value = get_language_context( ) ) TO lt_data_key.
         ls_prompt_input-application_id = gc_llm_app_id.
         ls_prompt_input-prompt_id      = gc_llm_content_prompt_id.
         ls_prompt_input-version        = 1.
@@ -347,6 +373,7 @@ CLASS ZCLCA_ABAP_ASSIST_AIUTIL IMPLEMENTATION.
 
         APPEND VALUE #( name = '{current_code_context}' value = iv_current_source ) TO lt_data_key.
         APPEND VALUE #( name = '{user_prompt}' value = lv_prompt ) TO lt_data_key.
+        APPEND VALUE #( name = '{llm_convo_lang}' value = get_language_context( ) ) TO lt_data_key.
 
         ls_prompt_input-application_id = gc_llm_app_id.
         ls_prompt_input-prompt_id = gc_chatbot_prompt_id.

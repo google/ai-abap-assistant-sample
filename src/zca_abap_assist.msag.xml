@@ -91,6 +91,12 @@
      <MSGNR>013</MSGNR>
      <TEXT>This tool should not be used in Production or SAP Reference systems.</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCA_ABAP_ASSIST</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>Invalid regular expression</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>
